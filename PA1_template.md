@@ -3,10 +3,10 @@ title: 'Reproducible Research: Peer Assessment 1'
 author: "Mike Kelly"
 date: "Tuesday, February 10, 2015"
 output:
-  word_document: default
-  pdf_document: default
   html_document:
-    keep_md: yes
+    keep_md: true
+  pdf_document: default
+  word_document: default
 ---
 
 <br>
@@ -41,6 +41,13 @@ The first step here is to load the data. The data can be found at (https://d396q
 ```r
 setwd("C:/Users/kellym/coursera/RepData_PeerAssesment1/RepData_PeerAssessment1")
 library("ggplot2")
+```
+
+```
+## Use suppressPackageStartupMessages to eliminate package startup messages.
+```
+
+```r
 #############################################################
 # Set the file name and url variables.
 #############################################################
