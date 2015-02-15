@@ -222,7 +222,7 @@ print(number_missing_values)
 ## [1] 2304
 ```
 
-Next, we impute the missing values into a new data set called **new_data**. First we create **new_data** as a copy of **data**. Now the the strategy used to populate the missing step values is to calculate the mean value of its interval during the day across the entire data set. This information is already stored in the dataset **mean_steps_per_interval**. We loop over the rows in **data** and copy the step value if it exists or replace it with the calculated mean if is missing with the value for that interval in **mean_steps_per_interval**.
+Next, we impute the missing values into a new data set called **new_data**. First we create **new_data** as a copy of **data**. Now the strategy used to populate the missing step values is to calculate the mean value of its interval during the day across the entire data set. This information is already stored in the dataset **mean_steps_per_interval**. We loop over the rows in **data** and copy the step value if it exists or replace it with the calculated mean if is missing with the value for that interval in **mean_steps_per_interval**.
 
 ```r
 new_data <- data    
@@ -304,7 +304,8 @@ print(median(as.numeric(new_steps_by_day$steps), na.rm=TRUE))
 ## [1] 10766.19
 ```
 
-To better see the differences, let us make a panel plot of the new and original histograms for steps per day. We will add a new factor column **imputed**, which can be Yes or No, to the **steps_by_day** and new_steps_by_day** DF's.
+To better see the differences, let us make a panel plot of the new and original histograms for steps per day. We will add a new factor column **imputed**, which can be Yes or No, 
+to the **steps_by_day** and the **new_steps_by_day** DF's.
 
 ```r
 steps_by_day$imputed <- "No"
@@ -350,7 +351,7 @@ print(p)
 
 ****************************
 ## Are there differences in activity patterns between weekdays and weekends?
-First, let us add a factor columns to the new_data DF for the day of the week and the week day type weekDay or weekEnd. We use a function called dayType to determine if it is a week day or weekend.
+First, let us add a factor column to each of the new_data DF for the day of the week and the week day type weekDay or weekEnd. We use a function called dayType to determine if it is a week day or weekend.
 
 ```r
 dayType <- function(weekDay){
