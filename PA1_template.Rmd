@@ -97,8 +97,8 @@ Part A, In order to get the total number of Steps per day we can ignore missing 
 steps_by_day <- aggregate(. ~date, data[,c("steps","date")], sum, na.rm=TRUE)
 ```
 
-A plot of the total number of steps per day in the "activity.csv" data set is shown below.
-```{r, echo=TRUE}
+A plot of the total number of steps per day in the "activity.csv" data set is shown below
+```{r StepsPerDay, echo=TRUE}
 p <- ggplot(steps_by_day, aes(date, steps))
 p <- p + geom_histogram(stat="identity",colour="white")
 p <- p + theme_bw( base_size=15 ) + 
@@ -146,7 +146,8 @@ mean_steps_per_interval <- aggregate(. ~interval, data[,c("steps","interval")], 
 ```
 
 Here is a plot for the average daily activity: 
-```{r,echo=TRUE }
+```{r MeanStepsPerInterval,echo=TRUE }
+par(mfrow=c(1,1))
 plot(mean_steps_per_interval, aes(interval, steps), type="l"
      ,xlab="5 Minute Interval of the Day"
      ,col="blue"
@@ -156,6 +157,7 @@ title ("Avg Daily Activity Pattern for 5 Minute Intervals")
 
 The 5 minute interval that has the maximun average number of steps is:
 ```{r,echo=TRUE}
+par(mfrow=c(1,1))
 max_avg <- max(as.numeric(mean_steps_per_interval$steps), na.rm=TRUE) 
 print(max_avg)
 ```
@@ -167,7 +169,8 @@ print(mean_avg)
 ```
 
 Now let us replot the daily activity again and overlay it with a line at the max value and the mean values:
-```{r,echo=TRUE}
+```{r AvgDailyActivypattern,echo=TRUE}
+par(mfrow=c(1,1))
 plot(mean_steps_per_interval, aes(interval, steps), type="l"
      ,xlab="5 Minute Interval of the Day"
      ,col="blue"
@@ -211,7 +214,7 @@ new_steps_by_day <- aggregate(. ~date, new_data[,c("steps","date")], sum, na.rm=
 ```
 
 Now, plot the histogram for the total number of steps per day:
-```{r,echo=TRUE}
+```{r TotalStepsImputed,echo=TRUE}
 p <- ggplot(new_steps_by_day, aes(date, steps))
 p <- p + geom_histogram(stat="identity",colour="white")
 p <- p + theme_bw( base_size=15 ) + 
@@ -260,7 +263,7 @@ all_steps_by_day <- rbind(steps_by_day, new_steps_by_day)
 ```
 
 Here is a panel plot of the steps per day comparing the original data set and the new imputed data set:
-```{r, echo=TRUE}
+```{r AllStepsbyday, echo=TRUE}
 par(mfrow=c(2,1)) # divide window into 2
 p <- ggplot(all_steps_by_day, aes(date, steps)) + facet_wrap(~imputed,nrow=2)
 p <- p + geom_histogram(stat="identity",colour="white")
@@ -313,7 +316,7 @@ names(weekEnds) <- c("interval","weekEndSteps")
 ```
 
 A panel plot for the week end and week day distributions is shown below: 
-```{r, echo=TRUE}
+```{r PanelPlotWeekDayWeekEnd, echo=TRUE}
 par(mfrow=c(2,1)) # divide window into 2
 plot(weekDays$interval, weekDays$weekDaySteps,type="l"
      ,xlab="Time Interval of Day"
@@ -339,7 +342,7 @@ weekDay_all <- merge(weekDays,weekEnds
 ```
 
 Now, we plot the difference of the interval values between the two data sets **weekDays** and **weekEnds**.
-```{r,echo=TRUE}
+```{r DeltaPatternWeekEndWeekDay,echo=TRUE}
 par(mfrow=c(1,1)) # divide window into 1
 plot(weekDay_all$interval, (weekDay_all$weekEndSteps - weekDay_all$weekDaySteps),type="l"
      ,xlab="Interval of the Day"
@@ -363,7 +366,7 @@ weekDay_interval <- rbind(weekDays,weekEnds)
 ```
 
 Here is the resulting overlay plot showing the two distributions:
-```{r,echo=TRUE}
+```{r TotalStepsPerTimeInterval,echo=TRUE}
 qplot(interval, steps, data = weekDay_interval, group = dayType, color = dayType,
       geom = c("line"), ylab = expression("Total Steps Per Interval"), 
       xlab = "Interval", main = "Total Steps per Time Interval")

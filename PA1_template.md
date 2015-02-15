@@ -100,7 +100,7 @@ Part A, In order to get the total number of Steps per day we can ignore missing 
 steps_by_day <- aggregate(. ~date, data[,c("steps","date")], sum, na.rm=TRUE)
 ```
 
-A plot of the total number of steps per day in the "activity.csv" data set is shown below.
+A plot of the total number of steps per day in the "activity.csv" data set is shown below
 
 ```r
 p <- ggplot(steps_by_day, aes(date, steps))
@@ -127,7 +127,7 @@ p <- p + theme_bw( base_size=15 ) +
 print(p)
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+![plot of chunk StepsPerDay](figure/StepsPerDay-1.png) 
 
 
 The mean Number ofsteps per day is:
@@ -165,6 +165,7 @@ mean_steps_per_interval <- aggregate(. ~interval, data[,c("steps","interval")], 
 Here is a plot for the average daily activity: 
 
 ```r
+par(mfrow=c(1,1))
 plot(mean_steps_per_interval, aes(interval, steps), type="l"
      ,xlab="5 Minute Interval of the Day"
      ,col="blue"
@@ -172,11 +173,12 @@ plot(mean_steps_per_interval, aes(interval, steps), type="l"
 title ("Avg Daily Activity Pattern for 5 Minute Intervals")
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
+![plot of chunk MeanStepsPerInterval](figure/MeanStepsPerInterval-1.png) 
 
 The 5 minute interval that has the maximun average number of steps is:
 
 ```r
+par(mfrow=c(1,1))
 max_avg <- max(as.numeric(mean_steps_per_interval$steps), na.rm=TRUE) 
 print(max_avg)
 ```
@@ -199,6 +201,7 @@ print(mean_avg)
 Now let us replot the daily activity again and overlay it with a line at the max value and the mean values:
 
 ```r
+par(mfrow=c(1,1))
 plot(mean_steps_per_interval, aes(interval, steps), type="l"
      ,xlab="5 Minute Interval of the Day"
      ,col="blue"
@@ -208,7 +211,7 @@ abline(col="red", ,text(400,(max_avg - 10 ), paste("max steps=",round(max_avg,di
 abline(col="green", ,text(400,(mean_avg - 10 ), paste("mean steps=",round(mean_avg,digits=2)), col = "Green"), h=mean_avg)
 ```
 
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
+![plot of chunk AvgDailyActivypattern](figure/AvgDailyActivypattern-1.png) 
 
 ## Imputing missing values
 We find that the data set has a large number of missing values for the steps variable. The total number of records with missing step values is:
@@ -281,7 +284,7 @@ p <- p + theme_bw( base_size=15 ) +
 print(p)
 ```
 
-![plot of chunk unnamed-chunk-17](figure/unnamed-chunk-17-1.png) 
+![plot of chunk TotalStepsImputed](figure/TotalStepsImputed-1.png) 
 
 The mean of the new data set with the imputed values is not much different that the mean of the original data set with missing values and the same for the median.
 The mean new steps per day for new_data is:
@@ -347,7 +350,7 @@ p <- p + theme_bw( base_size=15 ) +
 print(p)
 ```
 
-![plot of chunk unnamed-chunk-22](figure/unnamed-chunk-22-1.png) 
+![plot of chunk AllStepsbyday](figure/AllStepsbyday-1.png) 
 
 ****************************
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -391,7 +394,7 @@ title ("Week End Pattern (Sat-Sun)")
 box(which="outer", lty="solid")
 ```
 
-![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-25-1.png) 
+![plot of chunk PanelPlotWeekDayWeekEnd](figure/PanelPlotWeekDayWeekEnd-1.png) 
 
 Another way to view the difference is to subtract one distribution from the other. So we first merge the two new data sets **weekDays** and **weekEnds**: 
 
@@ -416,7 +419,7 @@ abline(h=0,abline(h=c(-50, 50,100)))
 box(which="outer", lty="solid")
 ```
 
-![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-27-1.png) 
+![plot of chunk DeltaPatternWeekEndWeekDay](figure/DeltaPatternWeekEndWeekDay-1.png) 
 
 Finally, we will also add an overlay plot showing the two distributions. We will add the factor dayType to the two data sets **weekDays** and **weekEnds**. The we rbind these data sets into a new data set called **weekDay_interval:
 
@@ -439,6 +442,6 @@ qplot(interval, steps, data = weekDay_interval, group = dayType, color = dayType
       xlab = "Interval", main = "Total Steps per Time Interval")
 ```
 
-![plot of chunk unnamed-chunk-29](figure/unnamed-chunk-29-1.png) 
+![plot of chunk TotalStepsPerTimeInterval](figure/TotalStepsPerTimeInterval-1.png) 
 
 
