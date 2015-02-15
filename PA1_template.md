@@ -169,7 +169,7 @@ plot(mean_steps_per_interval, aes(interval, steps), type="l"
      ,xlab="5 Minute Interval of the Day"
      ,col="blue"
 )
-title ("Average Daily Activity Pattern using 5 Minute Intervals")
+title ("Avg Daily Activity Pattern for 5 Minute Intervals")
 ```
 
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
@@ -203,9 +203,9 @@ plot(mean_steps_per_interval, aes(interval, steps), type="l"
      ,xlab="5 Minute Interval of the Day"
      ,col="blue"
 )
-title ("Average Daily Activity Pattern using 5 Minute Intervals")
-abline(col="red", ,text(250,(max_avg - 10 ), paste("max steps=",round(max_avg,digits=2)), col = "red"), h=max_avg)
-abline(col="green", ,text(250,(mean_avg - 10 ), paste("mean steps=",round(mean_avg,digits=2)), col = "Green"), h=mean_avg)
+title ("Avg Daily Activity Pattern for 5 Minute Intervals")
+abline(col="red", ,text(400,(max_avg - 10 ), paste("max steps=",round(max_avg,digits=2)), col = "red"), h=max_avg)
+abline(col="green", ,text(400,(mean_avg - 10 ), paste("mean steps=",round(mean_avg,digits=2)), col = "Green"), h=mean_avg)
 ```
 
 ![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
